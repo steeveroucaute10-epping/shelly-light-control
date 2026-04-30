@@ -1,17 +1,22 @@
 shelly:
   relay:
-    ip: '192.168.4.56'  # Confirmed light switch/relay IP
+    ip: '192.168.4.56'  # Shelly 1 PM Mini Gen 4 relay IP
 
 light_control:
   light_threshold: 50  # Lux threshold for turning on lights
   max_hour: 20  # 8 PM cutoff time
   check_interval: 5  # Check every 5 minutes
+  retry_attempts: 3  # Number of retry attempts for API calls
+  retry_delay: 10  # Seconds between retry attempts
 
 work_days:
-  - 1  # Tuesday
-  - 2  # Wednesday
+  - 0  # Monday
   - 3  # Thursday
+  - 4  # Friday
 
 logging:
   level: INFO
   file: '/var/log/shelly-light-control.log'
+
+network:
+  timeout: 10  # Seconds before connection attempt times out
