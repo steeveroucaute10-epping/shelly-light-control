@@ -32,6 +32,7 @@ class ShellyLightController:
         self.relay_ip = self.config['shelly']['relay']['ip']
         self.light_threshold = self.config['light_control']['light_threshold']
         self.max_hour = self.config['light_control']['max_hour']
+        self.min_hour = self.config['light_control']['min_hour']
         self.check_interval = self.config['light_control']['check_interval']
         self.retry_attempts = self.config['light_control'].get('retry_attempts', 3)
         self.retry_delay = self.config['light_control'].get('retry_delay', 10)
@@ -106,8 +107,8 @@ class ShellyLightController:
 
         # Check time constraint
         current_time = datetime.datetime.now()
-        if current_time.hour >= self.max_hour:
-            self.logger.debug(f"Time is after {self.max_hour}:00. Skipping light control.")
+        if current_time.hour < self.min_hour or current_time.hour >= self.max_hour:
+            self.logger.debug(f"Time is outside control window ({self.min_hour}:00 - {self.max_hour}:00). Skipping light control.")
             return
 
         # Retrieve light level

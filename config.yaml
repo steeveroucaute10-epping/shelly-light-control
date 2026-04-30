@@ -1,9 +1,12 @@
 shelly:
   relay:
     ip: '192.168.4.56'  # Shelly 1 PM Mini Gen 4 relay IP
+  display:
+    mac_address: 'c0:2c:ed:a9:05:41'  # Display MAC address
 
 light_control:
   light_threshold: 50  # Lux threshold for turning on lights
+  min_hour: 7   # Start time for light control (7 AM)
   max_hour: 20  # 8 PM cutoff time
   check_interval: 5  # Check every 5 minutes
   retry_attempts: 3  # Number of retry attempts for API calls
